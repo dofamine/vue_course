@@ -7,12 +7,37 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "bootstrap";
+
+.dropdown-clip {
+  overflow: hidden;
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.5s ease-in-out;
+  transform: auto;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-300px);
+}
+
+.products-enter-active,
+.products-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.products-enter-from {
+  opacity: 0;
+  transform: translateX(300px);
+}
+
+.products-leave-to {
+  opacity: 0;
+  transform: translateX(-300px);
 }
 
 nav {
