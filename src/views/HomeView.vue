@@ -18,7 +18,9 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <fa icon="shopping-cart"></fa>
+            <font-awesome-icon
+              icon="fa-solid fa-shopping-cart"
+            ></font-awesome-icon>
             {{ cart.length }}
           </button>
         </div>
@@ -114,7 +116,6 @@ export default defineComponent({
   methods: {
     addToCart(product) {
       this.cart.push(product);
-      console.log(this.cart);
       if (this.cartTotal >= 100) {
         this.salesBtn = "btn-danger";
       }
