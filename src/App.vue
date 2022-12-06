@@ -1,55 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <app-navbar :cartState="cartState"></app-navbar>
+  <div class="container">
+    <router-view :model="cartState" @add-to-cart="addToCart" />
+  </div>
 </template>
+
+<script lang="ts">
+import AppNavbar from "@/components/Navbar.vue";
+import { toRaw } from "vue";
+
+export default {
+  components: {
+    AppNavbar,
+  },
+  data() {
+    return {
+      cartState: [],
+    };
+  },
+  methods: {
+    addToCart(product: any) {
+      this.cartState.push(toRaw(product));
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 @import "bootstrap";
-
-.dropdown-clip {
-  overflow: hidden;
-}
-
-.dropdown-enter-active,
-.dropdown-leave-active {
-  transition: all 0.5s ease-in-out;
-  transform: auto;
-}
-
-.dropdown-enter-from,
-.dropdown-leave-to {
-  opacity: 0;
-  transform: translateY(-300px);
-}
-
-.products-enter-active,
-.products-leave-active {
-  transition: all 0.5s ease-in-out;
-}
-
-.products-enter-from {
-  opacity: 0;
-  transform: translateX(300px);
-}
-
-.products-leave-to {
-  opacity: 0;
-  transform: translateX(-300px);
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
