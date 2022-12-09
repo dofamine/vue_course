@@ -7,8 +7,11 @@
           :key="index"
           class="list-group-item d-flex justify-content-between"
         >
-          <div>{{ item.name }}</div>
-          <div class="ml-3 font-weight-bold">
+          <div>
+            {{ item.name }}
+            <strong>{{ item.qty > 1 ? `x ${item.qty}` : "" }}</strong>
+          </div>
+          <div class="price">
             <app-currency :amt="item.price"></app-currency>
           </div>
         </div>
@@ -28,6 +31,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.price {
+  margin-left: 5px;
+  font-weight: bold;
+  color: green;
+}
+
 .dropdown-clip {
   overflow: hidden;
 }

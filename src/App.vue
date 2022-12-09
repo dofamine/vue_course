@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import AppNavbar from "@/components/Navbar.vue";
 import { toRaw } from "vue";
 
@@ -19,8 +19,14 @@ export default {
     };
   },
   methods: {
-    addToCart(product: any) {
-      this.cartState.push(toRaw(product));
+    addToCart(product) {
+      let existingItem = this.cartState.find((item) => item.id === product.id);
+      if (existingItem) {
+        existingItem.qty++;
+      } else {
+        product.qty = 1;
+        this.cartState.push(toRaw(product));
+      }
     },
   },
 };

@@ -6,6 +6,7 @@
     ]"
     class="alert"
     role="alert"
+    ref="alert"
   >
     <slot>Congrats on getting some items in your cart.</slot>
     <button
@@ -25,6 +26,9 @@ export default {
     closeButton(event) {
       event.target.parentNode.remove();
     },
+  },
+  mounted() {
+    setTimeout(() => this.$refs.alert.remove(), 2000);
   },
   name: "app-alert",
 };

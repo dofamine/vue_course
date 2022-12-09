@@ -8,9 +8,7 @@
         class="mr-auto d-flex align-items-end flex-column bd-highlight mb-3 position-absolute"
       >
         <div class="mb-2">
-          <span class="font-weight-bold bg-white"
-            ><app-currency :amt="cartTotal"
-          /></span>
+          <span class="cart-total"><app-currency :amt="cartTotal" /></span>
           <button
             @click="displayCart = !displayCart"
             class="btn btn-sm btn-success ml-3"
@@ -21,7 +19,7 @@
             <font-awesome-icon
               icon="fa-solid fa-shopping-cart"
             ></font-awesome-icon>
-            {{ cartState.length }}
+            {{ itemsInCart }}
           </button>
         </div>
         <app-dropdown :show="displayCart" :items="cartState"></app-dropdown>
@@ -45,23 +43,22 @@ export default {
   },
   computed: {
     cartTotal() {
-      return this.cartState.reduce((inc, item) => Number(item.price) + inc, 0);
+      return this.cartState.reduce(
+        (inc, item) => Number(item.price) * item.qty + inc,
+        0
+      );
+    },
+    itemsInCart() {
+      return this.cartState.reduce((acc, item) => acc + item.qty, 0);
     },
   },
 };
 </script>
 
-<style scoped lang="scss">
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped>
+.cart-total {
+  font-weight: bold;
+  margin-right: 10px;
+  color: green;
 }
 </style>
