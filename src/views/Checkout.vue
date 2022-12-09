@@ -65,15 +65,23 @@ export default {
       );
     },
   },
+  created() {
+    this.emptyCartHandler();
+  },
   watch: {
-    total() {
+    model: {
+      handler() {
+        this.emptyCartHandler();
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    emptyCartHandler() {
       if (!this.total) {
         this.$router.push("/");
       }
     },
-  },
-  model() {
-    //TODO watcher is not working
   },
 };
 </script>
