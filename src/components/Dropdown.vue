@@ -5,7 +5,7 @@
         <div
           v-for="(item, index) in items"
           :key="index"
-          class="list-group-item d-flex justify-content-between"
+          class="list-group-item d-flex justify-content-end align-items-center"
         >
           <div>
             {{ item.name }}
@@ -14,6 +14,12 @@
           <div class="price">
             <app-currency :amt="item.price"></app-currency>
           </div>
+          <button
+            @click.self.stop="this.$emit('onDelete', item)"
+            class="btn btn-danger btn-sm"
+          >
+            -
+          </button>
         </div>
       </div>
     </transition>
@@ -26,6 +32,7 @@ import AppCurrency from "@/components/Curr.vue";
 export default {
   components: { AppCurrency },
   props: ["show", "items"],
+  emits: ["onDelete"],
   name: "app-dropdown",
 };
 </script>
@@ -35,6 +42,10 @@ export default {
   margin-left: 5px;
   font-weight: bold;
   color: green;
+}
+
+.btn-danger {
+  margin-left: 5px;
 }
 
 .dropdown-clip {

@@ -28,7 +28,9 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => this.$refs.alert.remove(), 2000);
+    setTimeout(() => {
+      this.$refs.alert && this.$refs.alert.remove(), 2000;
+    });
   },
   name: "app-alert",
 };

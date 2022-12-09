@@ -1,7 +1,14 @@
 <template>
-  <app-navbar :cartState="cartState"></app-navbar>
+  <app-navbar
+    :cartState="cartState"
+    @onDelete="deleteProductFromCart"
+  ></app-navbar>
   <div class="container">
-    <router-view :model="cartState" @add-to-cart="addToCart" />
+    <router-view
+      :model="cartState"
+      @add-to-cart="addToCart"
+      @remove="deleteProductFromCart"
+    />
   </div>
 </template>
 
@@ -26,6 +33,16 @@ export default {
       } else {
         product.qty = 1;
         this.cartState.push(toRaw(product));
+      }
+    },
+    deleteProductFromCart(product) {
+      const productIndex = this.cartState.findIndex(
+        (item) => item.id === product.id
+      );
+      if (this.cartState[productIndex].qty > 1) {
+        this.cartState[productIndex].qty--;
+      } else {
+        this.cartState.splice(productIndex, 1);
       }
     },
   },
